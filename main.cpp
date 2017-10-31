@@ -42,11 +42,11 @@ void showTopRowNumbers () {
   cout << "*    ";//first bin
   for (int t = 0; t < 6; t++) {
     cout << setw(3); // spacing for numbers
-    cout << "*" // star between numbers
-    cout << setw(3); // spacing for numbers
+    cout << " *"; // star between numbers
+    cout << setw(4); // spacing for numbers
     cout << t ;
   }
-  cout<< "         *";//last bin
+  cout<< "  *      *";//last bin
 }
 //function for numbers in bottom bins
 void showBottomRowNumbers (){
