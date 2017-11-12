@@ -171,7 +171,7 @@ int main() {
   return 0;
 }
 //Game over Function
-void gameOverCheck(int beadArray[MAX]) {
+int gameOverCheck(int beadArray[MAX]) {
   //vairables
   int winner = 0 ;// no winner yet
   int gameStatus = -1; //game not over
@@ -192,13 +192,15 @@ void gameOverCheck(int beadArray[MAX]) {
     //check what side has the most beads (left or right)
     beadArray[6]=beadArray[6]+side1;
     beadArray[13]=beadArray[13]+side2;
-    
+
     if(beadArray[6]>beadArray[13]) {
       winner = 1; // player 1 wins (collecting on right side)
     }
     else {
       winner = 2; // player 2 wins (collecting on the left side)
     }
+
+  }
   else {
     winner = -1;// no winner yet
   }
