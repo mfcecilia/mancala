@@ -209,6 +209,7 @@ int gameOverCheck(int beadArray[MAX]) {
   return winner;
 }
 
+<<<<<<< HEAD
 //get starting bin function
 int getStartingBin(beadArray, playerNum) {
   bool validStartingBin = false;
@@ -243,6 +244,27 @@ void dropBeads(playerNum) {
   startBeads = beadArray[startBin];
   //remove beads from starting bin to begin dropping beads
   beadArray[startBin] = 0;
+=======
+void getStartingBin(beadArray, playerNum) {
+  std::cout << "Which bin do you want to start in?" << '\n';
+  //get user input
+  std::cin >> startBin;
+  //accommodate for bead array starting from zero
+  startBin--;
+  //get number of beads in start bin
+  startBeads = beadArray[startBin];
+
+  //make sure there are beads in the start bin
+  if (startBeads > 0) {
+    //remove beads from starting bin
+    beadArray[startBin] = 0;
+  } else {
+    std::cout << "Please choose a bin with beads in it." << '\n';
+  }
+}
+
+void dropBeads(playerNum) {
+>>>>>>> 148a5fe5a8386bd0f83707cc87c88b26838e391a
   //while we have beads, start adding beads to the next bin
   while (startBeads > 0) {
     //iterate over bins
