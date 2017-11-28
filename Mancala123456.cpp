@@ -8,6 +8,16 @@
 using namespace std;
 //constant for array
 const int MAX = 14;
+//variable for player number
+int playerNum;
+// For the number of *'s
+int star;
+// array size
+const int arraySize = 14;
+//starting bin number
+int startBin;
+//beads from startBin
+int startBeads;
 //Function for lines across
 void makeSolidLine(int star);
 //Function for vertical lines
@@ -20,9 +30,10 @@ void startingArray();
 void showTopBins();
 //Function for showBottomBins
 void showBottomBins();
+//Function for getStartingBin()
+void getStartingBin();
 
-int star; // For the number of *'s
-const int arraySize = 14; // array size
+
 
 //Loop for lines across
 void makeSolidLine(int star) {
@@ -161,15 +172,6 @@ void startingArray(){
   const int startingArray[arraySize] = {4,4,4,4,4,4,0,4,4,4,4,4,4,0};
 }
 
-//main method
-int main() {
-  showBoard();
-  cout << endl << endl;
-  int beadArray [MAX] = {4,4,4,4,4,4,0,4,4,4,4,4,4,0};
-  startingArray();
-  printArray();
-  return 0;
-}
 //Game over Function
 int gameOverCheck(int beadArray[MAX]) {
   //vairables
@@ -205,4 +207,67 @@ int gameOverCheck(int beadArray[MAX]) {
     winner = -1;// no winner yet
   }
   return winner;
+}
+
+void getStartingBin(beadArray, playerNum) {
+  std::cout << "Which bin do you want to start in?" << '\n';
+  //get user input
+  std::cin >> startBin;
+  //accommodate for bead array starting from zero
+  startBin--;
+  //get number of beads in start bin
+  startBeads = beadArray[startBin];
+
+  //make sure there are beads in the start bin
+  if (startBeads > 0) {
+    //remove beads from starting bin
+    beadArray[startBin] = 0;
+  } else {
+    std::cout << "Please choose a bin with beads in it." << '\n';
+  }
+}
+
+void dropBeads(playerNum) {
+  //while we have beads, start adding beads to the next bin
+  while (startBeads > 0) {
+    //iterate over bins
+    for (int x = 0; x < beadArray.size(); x++) {
+      //find the startBin that was chosen
+      if (x == startBin) {
+        //start adding beads to the bin after startBin
+        x++;
+          //player one check
+          if ((playerNum == 1) && (x == 13)) {
+            //do not add beads to player two bin
+            // skip it and continue iterating from the beginning of player one bins
+            x = 0;
+            //add bead to bin
+            beadArray[x] = beadArray[x] + 1;
+            //keep track of beads leftover
+            startBeads--;
+          //player two check
+          } else if ((playerNum == 2) && (x == 6)) {
+            x = 7;
+            //add bead to bin
+            beadArray[x] = beadArray[x] + 1;
+            //keep track of beads leftover
+            startBeads--;
+          }
+          //add bead to bin
+          beadArray[x] = beadArray[x] + 1;
+          //keep track of beads leftover
+          startBeads--;
+        }
+      }
+    }
+}
+
+//main method
+int main() {
+  showBoard();
+  cout << endl << endl;
+  int beadArray [MAX] = {4,4,4,4,4,4,0,4,4,4,4,4,4,0};
+  startingArray();
+  printArray();
+  return 0;
 }
